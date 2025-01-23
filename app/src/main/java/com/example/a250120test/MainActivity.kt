@@ -7,12 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +22,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
@@ -188,36 +193,75 @@ fun Main(
                 ) {
                     Text(
                         text = "수업시간",
-                        fontSize = 25.sp
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Center
                     )
                     Row (
-                        modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier
+                            .height(40.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Spacer(modifier = Modifier.size(3.dp))
-                        Text(text = "1교시 ~ ", fontSize = 30.sp)
+                        Text(
+                            text = "1교시 ~ ",
+                            fontSize = 30.sp,
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                platformStyle = PlatformTextStyle(includeFontPadding = false)
+                            )
+                        )
 //                    TextField(
 //                        value = "",
 //                        onValueChange = {},
 //
 //                    )
-                        TextField(
-                            value = "",
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            singleLine = true,
+//                            textStyle = TextStyle(fontSize = 30.sp, textAlign = TextAlign.Center),
+//                            modifier = Modifier
+//                                .width(80.dp),
+//                            colors = TextFieldDefaults.colors(
+//                                focusedContainerColor = Color.White,
+//                                unfocusedContainerColor = Color.White,
+//                                focusedIndicatorColor = Color.Blue,
+//                                unfocusedIndicatorColor = Color.Black,
+//                                focusedTextColor = Color.Black,
+//                                unfocusedLabelColor = Color.Black,
+//                            ),
+//                        )
+                        BasicTextField(
+                            value = "7",
                             onValueChange = {},
-                            singleLine = true,
-                            textStyle = TextStyle(fontSize = 30.sp, textAlign = TextAlign.Center),
                             modifier = Modifier
-                                .width(80.dp),
-                            colors = TextFieldDefaults.colors(
-                                focusedContainerColor = Color.White,
-                                unfocusedContainerColor = Color.White,
-                                focusedIndicatorColor = Color.Blue,
-                                unfocusedIndicatorColor = Color.Black,
-                                focusedTextColor = Color.Black,
-                                unfocusedLabelColor = Color.Black,
+                                .width(50.dp)
+                                .fillMaxHeight(),
+                            singleLine = true,
+                            textStyle = TextStyle(
+                                fontSize = 30.sp,
+                                color = Color.Black,
+                                textAlign = TextAlign.Center
                             ),
-                            )
-                        Text("교시", fontSize = 30.sp)
+                            decorationBox = { innerTextField -> run {
+                                Box(
+                                    modifier = Modifier
+                                        .border(
+                                            border = BorderStroke(2.dp, Color.Black),
+                                            shape = RoundedCornerShape(corner = CornerSize(10.dp))
+                                        ),
+                                    contentAlignment = Alignment.BottomCenter,
+                                ) {
+                                    innerTextField()
+                                }
+                            }
+                            }
+                        )
+                        Text(
+                            text = "교시",
+                            fontSize = 30.sp,
+                            textAlign = TextAlign.Center
+                        )
                     }
                     Row (
                         modifier = Modifier,
